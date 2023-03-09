@@ -15,6 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Scene_02 1.unity
     guid: a4761bdc983277246877b1b07714ae84
   - enabled: 1
-    path: Assets/Scenes/Fast Food.unity
-    guid: aab4bdc0d29582a5089225d3084e78ca
+    path: Assets/Scenes/FastFood 1.unity
+    guid: 94f25933e26565d43930fc24c2ed8d6d
   m_configObjects: {}
