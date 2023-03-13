@@ -8,6 +8,9 @@ using UnityEngine.SceneManagement;
 
 public class UILoadScenes : MonoBehaviour
 {
+    public Animator transtion;
+    public float transitionTime = 1.5f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,28 +22,51 @@ public class UILoadScenes : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            LoadMenu();
+            StartCoroutine(LoadMenu());
         }
     }
 
-    public void LoadMenu()
+    IEnumerator LoadMenu()
     {
+        transtion.SetTrigger("Start");
+        yield return new WaitForSeconds(transitionTime);
         SceneManager.LoadScene(0);
         Cursor.lockState = CursorLockMode.Confined;
     }
 
     public void LoadAppart1()
     {
+        StartCoroutine(LoadAppart1_1());
+    }
+
+    IEnumerator LoadAppart1_1()
+    {
+        transtion.SetTrigger("Start");
+        yield return new WaitForSeconds(transitionTime);
         SceneManager.LoadScene(1);
     }
 
     public void LoadAppart2()
     {
+        StartCoroutine(LoadAppart2_1());
+    }
+
+    IEnumerator LoadAppart2_1()
+    {
+        transtion.SetTrigger("Start");
+        yield return new WaitForSeconds(transitionTime);
         SceneManager.LoadScene(2);
     }
 
     public void LoadFastFood()
     {
+        StartCoroutine(LoadFastFood_1());
+    }
+
+    IEnumerator LoadFastFood_1()
+    {
+        transtion.SetTrigger("Start");
+        yield return new WaitForSeconds(transitionTime);
         SceneManager.LoadScene(3);
     }
     public void Exit()
