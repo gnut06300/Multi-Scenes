@@ -9,23 +9,47 @@ using UnityEngine.SceneManagement;
 public class UILoadScenes : MonoBehaviour
 {
     public Animator transtion;
+    public GameObject menu;
     public float transitionTime = 1.5f;
+    private bool active = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (SceneManager.GetActiveScene().buildIndex != 0)
+        {
+            menu.SetActive(active);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.M))
         {
-            StartCoroutine(LoadMenu());
+            if(SceneManager.GetActiveScene().buildIndex != 0)
+            {
+                if (!active)
+                {
+                    active = true;
+                    menu.SetActive(active);
+                    Cursor.lockState = CursorLockMode.None;
+                }
+                else
+                {
+                    active = false;
+                    menu.SetActive(active);
+                    Cursor.lockState = CursorLockMode.Locked;
+                }
+            }
         }
     }
 
+    public void LoadMenu1()
+    {
+        StartCoroutine(LoadMenu());
+
+    }
     IEnumerator LoadMenu()
     {
         transtion.SetTrigger("Start");
