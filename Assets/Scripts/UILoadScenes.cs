@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEditor;
 #endif
 using UnityEngine.SceneManagement;
+using System.IO;
+
 
 public class UILoadScenes : MonoBehaviour
 {
@@ -12,6 +14,8 @@ public class UILoadScenes : MonoBehaviour
     public GameObject menu;
     public float transitionTime = 1.5f;
     private bool active = false;
+    [SerializeField] GameObject player;
+    [SerializeField] Data data;
 
     // Start is called before the first frame update
     void Start()
@@ -41,57 +45,67 @@ public class UILoadScenes : MonoBehaviour
                     menu.SetActive(active);
                     Cursor.lockState = CursorLockMode.Locked;
                 }
+
             }
         }
+        data.position = player.transform.position;
+        data.sceneIndex = SceneManager.GetActiveScene().buildIndex;
     }
 
-    public void LoadMenu1()
+    public void ChangeScene(int index)
     {
-        StartCoroutine(LoadMenu());
-
+        StartCoroutine(LoadScene(index));
     }
-    IEnumerator LoadMenu()
-    {
-        transtion.SetTrigger("Start");
-        yield return new WaitForSeconds(transitionTime);
-        SceneManager.LoadScene(0);
-        Cursor.lockState = CursorLockMode.Confined;
-    }
-
-    public void LoadAppart1()
-    {
-        StartCoroutine(LoadAppart1_1());
-    }
-
-    IEnumerator LoadAppart1_1()
+    
+    IEnumerator LoadScene(int index)
     {
         transtion.SetTrigger("Start");
         yield return new WaitForSeconds(transitionTime);
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(index);
     }
 
-    public void LoadAppart2()
-    {
-        StartCoroutine(LoadAppart2_1());
-    }
-
-    IEnumerator LoadAppart2_1()
+    IEnumerator LoadSceneLoad(int index, Vector3 positionSave)
     {
         transtion.SetTrigger("Start");
         yield return new WaitForSeconds(transitionTime);
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(index);
+        
     }
 
-    public void LoadFastFood()
+    [System.Serializable]
+    public class SaveData
     {
-        StartCoroutine(LoadFastFood_1());
+        public Vector3 position;
+        public int sectionIndex;
     }
 
-    IEnumerator LoadFastFood_1()
+    public void SaveDataFile()
     {
-        transtion.SetTrigger("Start");
-        yield return new WaitForSeconds(transitionTime);
-        SceneManager.LoadScene(3);
+        SaveData saveData = new SaveData();
+        saveData.position = data.position;
+        saveData.sectionIndex = data.sceneIndex;
+        string json = JsonUtility.ToJson(saveData);
+
+        File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
+    }
+
+    public void LoadData()
+    {
+        string path = Application.persistentDataPath + "/savefile.json";
+        if (File.Exists(path))
+        {
+            string json = File.ReadAllText(path);
+            SaveData saveData = JsonUtility.FromJson<SaveData>(json);
+            if(saveData.sectionIndex == SceneManager.GetActiveScene().buildIndex)
+            {
+                player.GetComponent<CharacterController>().Move(saveData.position - player.transform.position);
+            }
+            else
+            {
+                StartCoroutine(LoadSceneLoad(saveData.sectionIndex, saveData.position));
+            }
+            
+        }
     }
     public void Exit()
     {
