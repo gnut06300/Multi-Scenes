@@ -57,19 +57,11 @@ public class UILoadScenes : MonoBehaviour
         StartCoroutine(LoadScene(index));
     }
     
-    IEnumerator LoadScene(int index)
+    public IEnumerator LoadScene(int index)
     {
         transtion.SetTrigger("Start");
         yield return new WaitForSeconds(transitionTime);
-        SceneManager.LoadScene(index);
-    }
-
-    IEnumerator LoadSceneLoad(int index, Vector3 positionSave)
-    {
-        transtion.SetTrigger("Start");
-        yield return new WaitForSeconds(transitionTime);
-        SceneManager.LoadScene(index);
-        
+        MainManager.Instance.LoadScene(index);
     }
 
     [System.Serializable]
@@ -91,21 +83,7 @@ public class UILoadScenes : MonoBehaviour
 
     public void LoadData()
     {
-        string path = Application.persistentDataPath + "/savefile.json";
-        if (File.Exists(path))
-        {
-            string json = File.ReadAllText(path);
-            SaveData saveData = JsonUtility.FromJson<SaveData>(json);
-            if(saveData.sectionIndex == SceneManager.GetActiveScene().buildIndex)
-            {
-                player.GetComponent<CharacterController>().Move(saveData.position - player.transform.position);
-            }
-            else
-            {
-                StartCoroutine(LoadSceneLoad(saveData.sectionIndex, saveData.position));
-            }
-            
-        }
+        MainManager.Instance.LoadData();
     }
     public void Exit()
     {
