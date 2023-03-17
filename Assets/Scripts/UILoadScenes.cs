@@ -10,7 +10,7 @@ using System.IO;
 
 public class UILoadScenes : MonoBehaviour
 {
-    public Animator transtion;
+    public Animator transition;
     public GameObject menu;
     public float transitionTime = 1.5f;
     private bool active = false;
@@ -59,7 +59,7 @@ public class UILoadScenes : MonoBehaviour
     
     public IEnumerator LoadScene(int index)
     {
-        transtion.SetTrigger("Start");
+        transition.SetTrigger("Start");
         yield return new WaitForSeconds(transitionTime);
         MainManager.Instance.LoadScene(index);
     }

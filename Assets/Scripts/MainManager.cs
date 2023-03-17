@@ -58,12 +58,18 @@ public class MainManager : MonoBehaviour
             SaveData saveData = JsonUtility.FromJson<SaveData>(json);
             if (saveData.sectionIndex == SceneManager.GetActiveScene().buildIndex)
             {
-                player.GetComponent<CharacterController>().Move(saveData.position - player.transform.position);
+                //player.GetComponent<CharacterController>().Move(saveData.position - player.transform.position);
+                player.GetComponent<CharacterController>().enabled = false;
+                player.transform.position = saveData.position;
+                player.GetComponent<CharacterController>().enabled = true;
             }
             else
             {
                 yield return LoadSceneCoroutine(saveData.sectionIndex);
-                player.GetComponent<CharacterController>().Move(saveData.position - player.transform.position);
+                //player.GetComponent<CharacterController>().Move(saveData.position - player.transform.position);
+                player.GetComponent<CharacterController>().enabled = false;
+                player.transform.position = saveData.position;
+                player.GetComponent<CharacterController>().enabled = true;
             }
         }
         yield return null;
