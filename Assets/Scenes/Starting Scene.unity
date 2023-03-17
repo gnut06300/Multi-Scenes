@@ -355,6 +355,7 @@ MonoBehaviour:
   transitionTime: 2
   player: {fileID: 1129982056}
   data: {fileID: 11400000, guid: 217f6eff016921a47a46cae36b38a209, type: 2}
+  camera1: {fileID: 963194227}
 --- !u!224 &867701983 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1743490143046940609, guid: 44b0399a8c0ca1f46bdb72b56cdd6875, type: 3}

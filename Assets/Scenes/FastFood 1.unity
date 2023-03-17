@@ -5108,6 +5108,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9b081014bad86f4a80b60284279d21b, type: 3}
+--- !u!20 &294702106 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1927095934754023313, guid: a9b081014bad86f4a80b60284279d21b, type: 3}
+  m_PrefabInstance: {fileID: 294702105}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &296111803 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8499217605246230856, guid: 4d21a4697e44cd24bad1bef46f1b6bd3, type: 3}
@@ -15918,6 +15923,7 @@ MonoBehaviour:
   transitionTime: 1.5
   player: {fileID: 1205954129}
   data: {fileID: 11400000, guid: 217f6eff016921a47a46cae36b38a209, type: 2}
+  camera1: {fileID: 294702106}
 --- !u!114 &862985849
 MonoBehaviour:
   m_ObjectHideFlags: 0

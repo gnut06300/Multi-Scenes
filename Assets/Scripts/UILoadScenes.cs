@@ -16,6 +16,7 @@ public class UILoadScenes : MonoBehaviour
     private bool active = false;
     [SerializeField] GameObject player;
     [SerializeField] Data data;
+    [SerializeField] Camera camera1;
 
     // Start is called before the first frame update
     void Start()
@@ -38,12 +39,15 @@ public class UILoadScenes : MonoBehaviour
                     active = true;
                     menu.SetActive(active);
                     Cursor.lockState = CursorLockMode.None;
+                    camera1.GetComponent<SojaExiles.MouseLook>().enabled = false;
+
                 }
                 else
                 {
                     active = false;
                     menu.SetActive(active);
                     Cursor.lockState = CursorLockMode.Locked;
+                    camera1.GetComponent<SojaExiles.MouseLook>().enabled = true;
                 }
 
             }
