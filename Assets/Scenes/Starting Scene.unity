@@ -350,7 +350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 182d373a0bf557d469f77737b29f98e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transtion: {fileID: 4456766832937328992}
+  transition: {fileID: 4456766832937328992}
   menu: {fileID: 1743490142247396127}
   transitionTime: 2
   player: {fileID: 1129982056}
