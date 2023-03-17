@@ -17,6 +17,7 @@ public class UILoadScenes : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] Data data;
     [SerializeField] Camera camera1;
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +26,7 @@ public class UILoadScenes : MonoBehaviour
         {
             menu.SetActive(active);
         }
+        audioSource = camera1.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -54,6 +56,11 @@ public class UILoadScenes : MonoBehaviour
         }
         data.position = player.transform.position;
         data.sceneIndex = SceneManager.GetActiveScene().buildIndex;
+    }
+
+    public void UpdateVolume(float volume)
+    {
+        audioSource.volume = volume;
     }
 
     public void ChangeScene(int index)
